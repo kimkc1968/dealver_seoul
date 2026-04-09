@@ -10,46 +10,64 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;900&display=swap');
-        body { font-family: 'Pretendard', sans-serif; }
+        body { 
+            font-family: 'Pretendard', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+        }
         .tab-active { background-color: #ef4444 !important; color: white !important; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
         .summary-active { background-color: #0f172a !important; color: white !important; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
         .info-active { background-color: #4f46e5 !important; color: white !important; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        
+        /* Smooth scrolling for mobile table */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen p-2 md:p-6 lg:p-8">
+<body class="bg-slate-50 text-slate-900 min-h-screen p-3 md:p-6 lg:p-8">
     <div class="max-w-[1400px] mx-auto">
         <!-- Header -->
-        <header class="mb-6 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-slate-200 rounded-full text-xs font-semibold text-slate-500 mb-2 shadow-sm">
+        <header class="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div class="text-center md:text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-slate-200 rounded-full text-xs font-semibold text-slate-500 mb-3 shadow-sm">
                     <i data-lucide="calendar" class="w-3 h-3 text-red-500"></i>
                     <span>2026년 4월 13일 - 4월 17일</span>
                 </div>
                 <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">
                     Barogo <span class="text-red-600">x</span> Dealver
                 </h1>
-                <p class="text-slate-500 text-lg font-medium mt-1">R&D SynkUp Week 일정표</p>
+                <p class="text-slate-500 text-base md:text-lg font-medium mt-1">R&D SynkUp Week 일정표</p>
             </div>
+            
             <!-- Navigation Tabs -->
             <div class="flex flex-wrap gap-2 justify-center md:justify-end" id="tab-container">
-                <button onclick="switchTab(0)" id="tab-0" class="px-4 py-2 rounded-lg text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 summary-active">요약</button>
-                <button onclick="switchTab(1)" id="tab-1" class="px-4 py-2 rounded-lg text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">Day 1</button>
-                <button onclick="switchTab(2)" id="tab-2" class="px-4 py-2 rounded-lg text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">Day 2</button>
-                <button onclick="switchTab(3)" id="tab-3" class="px-4 py-2 rounded-lg text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">Day 3</button>
-                <button onclick="switchTab(4)" id="tab-4" class="px-4 py-2 rounded-lg text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">Day 4</button>
-                <button onclick="switchTab(5)" id="tab-5" class="px-4 py-2 rounded-lg text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">Day 5</button>
-                <button onclick="switchTab(6)" id="tab-6" class="px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
+                <button onclick="switchTab(0)" id="tab-0" class="flex-1 md:flex-none px-4 py-2.5 rounded-xl text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 summary-active">요약</button>
+                <div class="grid grid-cols-5 w-full md:flex md:w-auto gap-1 md:gap-2">
+                    <button onclick="switchTab(1)" id="tab-1" class="px-2 md:px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">D-1</button>
+                    <button onclick="switchTab(2)" id="tab-2" class="px-2 md:px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">D-2</button>
+                    <button onclick="switchTab(3)" id="tab-3" class="px-2 md:px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">D-3</button>
+                    <button onclick="switchTab(4)" id="tab-4" class="px-2 md:px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">D-4</button>
+                    <button onclick="switchTab(5)" id="tab-5" class="px-2 md:px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">D-5</button>
+                </div>
+                <button onclick="switchTab(6)" id="tab-6" class="flex-1 md:flex-none px-4 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
                     <i data-lucide="info" class="w-4 h-4"></i>정보
                 </button>
             </div>
         </header>
 
         <!-- Content Area -->
-        <div id="main-content" class="bg-white/70 backdrop-blur-md rounded-3xl p-4 md:p-6 border border-white/40 shadow-xl min-h-[500px]">
+        <div id="main-content" class="bg-white/80 backdrop-blur-md rounded-[2rem] p-4 md:p-8 border border-white shadow-2xl min-h-[500px]">
             <!-- Content will be injected here via JavaScript -->
         </div>
 
-        <footer class="mt-8 text-center text-slate-400 text-xs font-medium">
+        <footer class="mt-8 mb-6 text-center text-slate-400 text-xs font-medium">
             <p>© 2026 Barogo x Dealver R&D SynkUp Week</p>
         </footer>
     </div>
@@ -72,28 +90,28 @@
                 events: [
                     { time: "09:30 - 12:00", title: "개인 업무", icon: "briefcase", type: "work" },
                     { time: "12:00 - 13:00", title: "점심 시간", icon: "coffee", type: "social" },
-                    { time: "13:30 - 14:30", title: "시장과 우리", speaker: "고영웅", icon: "briefcase", type: "education", details: ["배달 시장 트렌드 및 유통/브랜드 물류 현황 분석", "바로고의 현재 지표와 비즈니스 우선순위 공유"] },
-                    { time: "14:30 - 16:00", title: "라이더 통합의 비전", speaker: "CPO 조병익", icon: "brain-circuit", type: "education", details: ["3사 통합의 핵심인 One App 구축 목적", "통합 플랫폼 구축 시의 비즈니스 시너지 및 로드맵"] },
+                    { time: "13:30 - 14:30", title: "시장과 우리", speaker: "고영웅", icon: "briefcase", type: "education", details: ["배달 시장 트렌드 분석", "바로고 현재 지표 및 우선순위 공유"] },
+                    { time: "14:30 - 16:00", title: "라이더 통합의 비전", speaker: "CPO 조병익", icon: "brain-circuit", type: "education", details: ["3사 통합 One App 구축 목적", "비즈니스 시너지 및 로드맵"] },
                     { time: "16:00 - 18:30", title: "개인 업무", icon: "briefcase", type: "work" }
                 ]
             },
             {
                 day: 3, date: "Day 3 (수)", title: "미래 기술의 실체", subtitle: "테크", theme: "bg-purple-50 text-purple-700 border-purple-200",
                 events: [
-                    { time: "10:00 - 12:00", title: "AI 프로젝트 메이킹 히스토리", speaker: "전략팀 이지민", icon: "brain-circuit", type: "education", details: ["프로젝트 탄생 배경 및 초기 구축 과정 공유", "현재 운영 현황 및 향후 고도화 계획"] },
+                    { time: "10:00 - 12:00", title: "AI 프로젝트 메이킹 히스토리", speaker: "전략팀 이지민", icon: "brain-circuit", type: "education", details: ["프로젝트 탄생 배경 공유", "운영 현황 및 향후 계획"] },
                     { time: "12:00 - 13:00", title: "점심 시간", icon: "coffee", type: "social" },
-                    { time: "13:00 - 14:30", title: "AI Agent 개발 환경 소개", speaker: "DevOps팀", icon: "briefcase", type: "education", details: ["AI 에이전트 구축 배경 및 현재 개발 환경 브리핑"] },
-                    { time: "14:30 - 16:00", title: "물류 AI의 미래", speaker: "DevOps팀", icon: "brain-circuit", type: "education", details: ["AWS Bedrock 설명 및 생성형 AI 도입 전략"] },
+                    { time: "13:00 - 14:30", title: "AI Agent 개발 환경 소개", speaker: "DevOps팀", icon: "briefcase", type: "education", details: ["AI 에이전트 구축 배경 브리핑"] },
+                    { time: "14:30 - 16:00", title: "물류 AI의 미래", speaker: "DevOps팀", icon: "brain-circuit", type: "education", details: ["AWS Bedrock 및 생성형 AI 도입 전략"] },
                     { time: "16:00 - 18:30", title: "개인 업무", icon: "briefcase", type: "work" }
                 ]
             },
             {
                 day: 4, date: "Day 4 (목)", title: "보안교육 및 고릴라와 소통", subtitle: "소통", theme: "bg-orange-50 text-orange-700 border-orange-200",
                 events: [
-                    { time: "10:00 - 11:30", title: "개인정보취급자 교육", speaker: "정보보안팀", icon: "shield-check", type: "education", details: ["개인정보 보호 가이드 및 개발 실무 보안 필수 교육"] },
+                    { time: "10:00 - 11:30", title: "개인정보취급자 교육", speaker: "정보보안팀", icon: "shield-check", type: "education", details: ["개인정보 보호 가이드", "개발 실무 보안 필수 교육"] },
                     { time: "12:00 - 13:00", title: "점심 시간", icon: "coffee", type: "social" },
-                    { time: "13:30 - 14:30", title: "고릴라 프로젝트 비전", speaker: "김민구", icon: "users", type: "education", details: ["고릴라 프로젝트 전체 구조, 향후 로드맵, 핵심 가치 소개"] },
-                    { time: "14:30 - 16:00", title: "Q&A 무엇이든 물어보살", speaker: "유재현 님", icon: "message-circle", type: "education", details: ["사전 취합된 딜버팀의 질문 및 추가적인 답변과 토론"] },
+                    { time: "13:30 - 14:30", title: "고릴라 프로젝트 비전", speaker: "김민구", icon: "users", type: "education", details: ["프로젝트 전체 구조 및 로드맵"] },
+                    { time: "14:30 - 16:00", title: "Q&A 무엇이든 물어보살", speaker: "유재현 님", icon: "message-circle", type: "education", details: ["질의응답 및 투명한 답변과 토론"] },
                     { time: "16:00 - 18:30", title: "개인 업무", icon: "briefcase", type: "work" },
                     { time: "18:30 - 21:00", title: "전체 저녁 식사", speaker: "부산팀+서울리더", icon: "coffee", type: "social", details: ["장소: 서울 본사 인근 식당(예정)", "공식 회식 및 네트워킹"] }
                 ]
@@ -102,7 +120,7 @@
                 day: 5, date: "Day 5 (금)", title: "One R&D", subtitle: "회고", theme: "bg-emerald-50 text-emerald-700 border-emerald-200",
                 events: [
                     { time: "08:30 - 09:00", title: "숙소 퇴실 및 이동", icon: "log-out", type: "move" },
-                    { time: "10:00 - 11:30", title: "R&D 타운홀 미팅", speaker: "R&D 전원", icon: "users", type: "education", details: ["한 주간의 회고, 소감 공유", "조직 간 아이스브레이킹 활동"] },
+                    { time: "10:00 - 11:30", title: "R&D 타운홀 미팅", speaker: "R&D 전원", icon: "users", type: "education", details: ["한 주간의 회고 및 소감 공유"] },
                     { time: "11:30 - 12:00", title: "정리 및 이동 준비", icon: "briefcase", type: "work" },
                     { time: "12:00 - 13:00", title: "점심 시간", icon: "coffee", type: "social" },
                     { time: "13:00 - 13:30", title: "수서역 이동 (강남구청역 출발)", speaker: "도보 포함 약 30분 소요", icon: "map-pin", type: "move" },
@@ -116,20 +134,26 @@
         function switchTab(index) {
             activeTab = index;
             // Update Tab UI
-            for (let i = 0; i <= 6; i++) {
+            const tabIndices = [0, 1, 2, 3, 4, 5, 6];
+            tabIndices.forEach(i => {
                 const btn = document.getElementById(`tab-${i}`);
+                if (!btn) return;
                 btn.classList.remove('summary-active', 'tab-active', 'info-active');
                 if (i === index) {
                     if (i === 0) btn.classList.add('summary-active');
                     else if (i === 6) btn.classList.add('info-active');
                     else btn.classList.add('tab-active');
                 }
-            }
+            });
             renderContent();
+            // Scroll to top on content change
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function renderContent() {
             const container = document.getElementById('main-content');
+            container.innerHTML = ''; // Clear current content
+            
             if (activeTab === 0) {
                 renderSummary(container);
             } else if (activeTab === 6) {
@@ -142,66 +166,82 @@
 
         function renderSummary(container) {
             container.innerHTML = `
-                <div class="overflow-x-auto">
-                    <h2 class="text-xl font-bold mb-6 px-2 flex items-center gap-2">
-                        <div class="w-1.5 h-6 bg-red-500 rounded-full"></div>주간 전체 일정 요약
-                    </h2>
-                    <table class="w-full text-sm text-left border-collapse min-w-[1000px]">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-1.5 h-6 bg-red-500 rounded-full"></div>
+                    <h2 class="text-xl md:text-2xl font-bold">주간 전체 일정 요약</h2>
+                </div>
+                <div class="overflow-x-auto custom-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
+                    <table class="w-full text-xs md:text-sm text-left border-collapse min-w-[800px] table-fixed">
                         <thead>
                             <tr class="bg-slate-100/50">
-                                <th class="p-4 border-b border-slate-200 text-slate-600 font-bold uppercase w-20">구분</th>
+                                <th class="p-4 border-b border-slate-200 text-slate-600 font-bold uppercase w-20 text-center">구분</th>
                                 ${scheduleData.map(d => `<th class="p-4 border-b border-slate-200 text-slate-600 font-bold text-center">${d.date}</th>`).join('')}
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-slate-100">
                             <tr>
-                                <td class="p-4 border-b border-slate-100 font-bold text-slate-700 bg-slate-50/30 text-center">오전 / 점심</td>
-                                <td class="p-4 border-b border-slate-100 bg-amber-50 text-amber-800 text-center" rowspan="2">
-                                    <div class="text-[10px] opacity-70 font-bold mb-1">10:33 ~ 13:08</div>
+                                <td class="p-4 font-bold text-slate-700 bg-slate-50/30 text-center">오전 / 점심</td>
+                                <td class="p-4 bg-amber-50 text-amber-800 text-center" rowspan="2">
+                                    <div class="text-[10px] opacity-70 font-bold mb-1 uppercase">10:33 ~ 13:08</div>
                                     <div class="font-bold">부산 출발</div>
-                                    <span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">KTX 326</span>
+                                    <span class="inline-block px-1.5 py-0.5 bg-slate-100/50 text-[10px] rounded-md text-slate-600 border border-amber-200 font-medium mt-2">KTX 326</span>
                                 </td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">09:30 ~ 12:00</div>개인 업무</td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">10:00 ~ 12:00</div>AI 프로젝트 역사<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">이지민</span></td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">10:00 ~ 11:30</div>개인정보 보안교육<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">정보보안팀</span></td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 font-medium text-center"><div class="text-[10px] opacity-70 mb-1">10:00 ~ 11:30</div>R&D 타운홀<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">R&D 전원</span></td>
+                                <td class="p-4 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">09:30 ~ 12:00</div>개인 업무</td>
+                                <td class="p-4 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">10:00 ~ 12:00</div>AI 프로젝트 역사<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-2">이지민</span></td>
+                                <td class="p-4 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">10:00 ~ 11:30</div>보안 교육<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-2">정보보안팀</span></td>
+                                <td class="p-4 text-slate-600 font-medium text-center"><div class="text-[10px] opacity-70 mb-1">10:00 ~ 11:30</div>R&D 타운홀<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-2">전원</span></td>
                             </tr>
                             <tr>
-                                <td class="p-4 border-b border-slate-100 font-bold text-slate-700 bg-slate-50/30 text-center">점심</td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center bg-slate-50/20">12:00 ~ 13:00 점심</td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center bg-slate-50/20">12:00 ~ 13:00 점심</td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center bg-slate-50/20">12:00 ~ 13:00 점심</td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center bg-slate-50/20">12:00 ~ 13:00 점심</td>
+                                <td class="p-4 font-bold text-slate-700 bg-slate-50/30 text-center">점심</td>
+                                <td class="p-4 text-slate-400 text-center bg-slate-50/20 italic">점심 시간</td>
+                                <td class="p-4 text-slate-400 text-center bg-slate-50/20 italic">점심 시간</td>
+                                <td class="p-4 text-slate-400 text-center bg-slate-50/20 italic">점심 시간</td>
+                                <td class="p-4 text-slate-400 text-center bg-slate-50/20 italic">점심 시간</td>
                             </tr>
                             <tr>
-                                <td class="p-4 border-b border-slate-100 font-bold text-slate-700 bg-slate-50/30 align-top text-center" rowspan="3">오후</td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center" rowspan="2"><div class="text-[10px] opacity-70 mb-1">14:00 ~ 16:00</div>본사 소개 / 시너지 전략<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">진명희, 조병익</span></td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">13:30 ~ 14:30</div>비즈니스 상황 공유<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">고영웅</span></td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">13:00 ~ 14:30</div>AI 개발 환경 소개<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">DevOps</span></td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">13:30 ~ 14:30</div>고릴라 비전 공유<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">김민구</span></td>
-                                <td class="p-4 border-b border-slate-100 bg-amber-50 text-amber-800 text-center" rowspan="3"><div class="text-[10px] opacity-70 font-bold mb-1">13:55 ~ 16:14</div><div class="font-bold">수서 출발</div><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">KTX 339</span></td>
+                                <td class="p-4 font-bold text-slate-700 bg-slate-50/30 align-top text-center" rowspan="3">오후</td>
+                                <td class="p-4 text-slate-600 text-center" rowspan="2"><div class="text-[10px] opacity-70 mb-1">14:00 ~ 16:00</div>본사 소개 / 전략<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-2">진명희, 조병익</span></td>
+                                <td class="p-4 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">13:30 ~ 14:30</div>비즈니스 상황<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-2">고영웅</span></td>
+                                <td class="p-4 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">13:00 ~ 14:30</div>AI 개발 환경<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-2">DevOps</span></td>
+                                <td class="p-4 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">13:30 ~ 14:30</div>고릴라 비전 공유<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-2">김민구</span></td>
+                                <td class="p-4 bg-amber-50 text-amber-800 text-center" rowspan="3">
+                                    <div class="text-[10px] opacity-70 font-bold mb-1 uppercase">13:55 ~ 16:14</div>
+                                    <div class="font-bold">수서 출발</div>
+                                    <span class="inline-block px-1.5 py-0.5 bg-slate-100/50 text-[10px] rounded-md text-slate-600 border border-amber-200 font-medium mt-2">KTX 339</span>
+                                </td>
                             </tr>
                             <tr>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">14:30 ~ 16:00</div>라이더앱 통합 비전<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">조병익</span></td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">14:30 ~ 16:00</div>AWS 도입 전략<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">DevOps</span></td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">14:30 ~ 16:00</div>Q&A 세션<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">유재현</span></td>
+                                <td class="p-4 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">14:30 ~ 16:00</div>라이더앱 비전<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-2">조병익</span></td>
+                                <td class="p-4 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">14:30 ~ 16:00</div>AWS 도입 전략<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-2">DevOps</span></td>
+                                <td class="p-4 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">14:30 ~ 16:00</div>Q&A 세션<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-2">유재현</span></td>
                             </tr>
                             <tr>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">16:00 ~ 18:30</div>개인 업무</td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">16:00 ~ 18:30</div>개인 업무</td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">16:00 ~ 18:30</div>개인 업무</td>
-                                <td class="p-4 border-b border-slate-100 text-slate-600 text-center"><div class="text-[10px] opacity-70 mb-1">16:00 ~ 18:30</div>개인 업무</td>
+                                <td class="p-4 text-slate-400 text-center italic">개인 업무</td>
+                                <td class="p-4 text-slate-400 text-center italic">개인 업무</td>
+                                <td class="p-4 text-slate-400 text-center italic">개인 업무</td>
+                                <td class="p-4 text-slate-400 text-center italic">개인 업무</td>
                             </tr>
                             <tr>
                                 <td class="p-4 font-bold text-slate-700 bg-slate-50/30 text-center">저녁</td>
-                                <td class="p-4 border-b border-slate-100 bg-slate-50/10 text-center"><div class="text-[10px] opacity-70 mb-1">18:30 ~ </div>숙소 입실<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">호텔 크레센도</span></td>
-                                <td class="p-4 text-slate-400 italic text-center">-</td>
-                                <td class="p-4 text-slate-400 italic text-center">-</td>
-                                <td class="p-4 bg-red-50 text-red-700 font-bold border-b border-slate-100 text-center"><div class="text-[10px] opacity-70 mb-1">18:30 ~ 21:00</div>전체 저녁 식사<br/><span class="inline-block px-1.5 py-0.5 bg-slate-100 text-[10px] rounded-md text-slate-500 border border-slate-200 font-medium mt-1">참석 전원</span></td>
+                                <td class="p-4 bg-slate-50/10 text-center">
+                                    <div class="text-[10px] opacity-70 mb-1">18:30 ~</div>
+                                    <div class="font-medium text-slate-600">숙소 입실</div>
+                                    <span class="inline-block px-1.5 py-0.5 bg-white text-[9px] rounded text-slate-400 border border-slate-100 mt-1 uppercase">Hotel</span>
+                                </td>
+                                <td class="p-4 text-slate-300 italic text-center text-xs">자유 시간</td>
+                                <td class="p-4 text-slate-300 italic text-center text-xs">자유 시간</td>
+                                <td class="p-4 bg-red-50 text-red-700 font-bold text-center">
+                                    <div class="text-[10px] opacity-70 mb-1">18:30 ~</div>
+                                    전체 저녁 식사
+                                </td>
                                 <td class="p-4 text-slate-400 italic text-center">-</td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="mt-6 p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-3">
+                    <i data-lucide="info" class="w-5 h-5 text-slate-400 shrink-0"></i>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">모바일에서는 표를 좌우로 밀어서 전체 일정을 확인하세요.</p>
                 </div>
             `;
         }
@@ -210,36 +250,44 @@
             const day = scheduleData[dayIndex - 1];
             container.innerHTML = `
                 <div class="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                    <div class="mb-6 p-6 rounded-2xl border ${day.theme}">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold uppercase tracking-widest opacity-70">${day.date} / ${day.subtitle}</span>
-                            <i data-lucide="calendar" class="w-5 h-5 opacity-40"></i>
+                    <div class="mb-6 p-6 md:p-8 rounded-[1.5rem] border ${day.theme} relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-8 opacity-10"><i data-lucide="calendar" class="w-24 h-24"></i></div>
+                        <div class="flex justify-between items-start mb-3 relative">
+                            <span class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] opacity-80">${day.date} / ${day.subtitle}</span>
                         </div>
-                        <h2 class="text-2xl font-black mb-1">${day.title}</h2>
-                        <p class="text-sm opacity-80">R&D SynkUp Week ${day.day}일차 일정입니다.</p>
+                        <h2 class="text-2xl md:text-3xl font-black mb-2 relative">${day.title}</h2>
+                        <p class="text-sm opacity-90 font-medium relative italic">R&D SynkUp Week ${day.day}일차 공식 일정</p>
                     </div>
-                    <div class="space-y-4">
+                    <div class="space-y-3">
                         ${day.events.map(event => `
-                            <div class="flex gap-4 p-4 bg-white border border-slate-100 rounded-xl shadow-sm">
-                                <div class="flex flex-col items-center min-w-[100px] text-slate-500 font-medium">
-                                    <div class="flex items-center gap-1 text-xs">
-                                        <i data-lucide="clock" class="w-3 h-3"></i>
+                            <div class="flex flex-col md:flex-row gap-3 md:gap-6 p-4 md:p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+                                <div class="flex flex-row md:flex-col items-center md:items-center justify-between md:justify-start min-w-[120px] md:border-r border-slate-50 md:pr-6">
+                                    <div class="flex items-center gap-2 text-xs md:text-sm font-bold text-slate-600">
+                                        <i data-lucide="clock" class="w-3.5 h-3.5 text-slate-300"></i>
                                         <span>${event.time.split(' - ')[0]}</span>
                                     </div>
-                                    <div class="h-full w-px bg-slate-100 my-2"></div>
-                                    <div class="text-[10px] text-slate-400">${event.time.split(' - ')[1] || ""}</div>
+                                    <div class="hidden md:block h-8 w-px bg-slate-100 my-2"></div>
+                                    <div class="text-[10px] md:text-xs text-slate-400 font-bold">${event.time.split(' - ')[1] || ""}</div>
                                 </div>
                                 <div class="flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <span class="p-1.5 rounded-lg ${getEventClass(event.type)}">
-                                            <i data-lucide="${event.icon}" class="w-4 h-4"></i>
-                                        </span>
-                                        <h4 class="font-bold text-slate-800">${event.title}</h4>
+                                    <div class="flex items-start justify-between gap-4">
+                                        <div class="flex items-center gap-3">
+                                            <span class="p-2 rounded-xl ${getEventClass(event.type)} transition-colors">
+                                                <i data-lucide="${event.icon}" class="w-4 h-4 md:w-5 md:h-5"></i>
+                                            </span>
+                                            <h4 class="text-base md:text-lg font-bold text-slate-800 leading-tight">${event.title}</h4>
+                                        </div>
                                     </div>
-                                    ${event.speaker ? `<p class="text-sm text-slate-600 mb-2 font-medium">👤 ${event.speaker}</p>` : ""}
+                                    ${event.speaker ? `<div class="flex items-center gap-1.5 mt-3 text-sm text-slate-500 font-semibold bg-slate-50 self-start px-2 py-1 rounded-lg border border-slate-100">
+                                        <i data-lucide="user" class="w-3 h-3 text-slate-400"></i>
+                                        <span>${event.speaker}</span>
+                                    </div>` : ""}
                                     ${event.details ? `
-                                        <ul class="space-y-1 mt-2">
-                                            ${event.details.map(d => `<li class="text-sm text-slate-500 flex items-start gap-2"><i data-lucide="chevron-right" class="w-3 h-3 mt-1 text-slate-300"></i>${d}</li>`).join('')}
+                                        <ul class="space-y-2 mt-4">
+                                            ${event.details.map(d => `<li class="text-sm text-slate-500 flex items-start gap-2.5 leading-relaxed font-medium">
+                                                <i data-lucide="chevron-right" class="w-4 h-4 mt-0.5 text-slate-300 shrink-0"></i>
+                                                <span>${d}</span>
+                                            </li>`).join('')}
                                         </ul>` : ""}
                                 </div>
                             </div>
@@ -251,51 +299,87 @@
 
         function renderInfo(container) {
             container.innerHTML = `
-                <div class="p-4 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div class="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <section>
-                        <h3 class="text-lg font-bold mb-4 flex items-center gap-2"><i data-lucide="train-front" class="w-5 h-5 text-red-500"></i>KTX 열차 정보</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm overflow-hidden relative">
-                                <div class="absolute top-0 right-0 p-3 opacity-10 text-slate-400"><i data-lucide="train-front" class="w-20 h-20"></i></div>
-                                <div class="flex items-center gap-2 mb-3">
-                                    <span class="px-2 py-0.5 bg-red-100 text-red-600 rounded-md text-xs font-bold">상행</span>
-                                    <span class="font-bold text-slate-800">KTX 326</span>
+                        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                            <i data-lucide="train-front" class="w-6 h-6 text-red-500"></i>KTX 열차 정보
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+                            <!-- 상행 -->
+                            <div class="bg-white border border-slate-200 rounded-[1.5rem] p-6 shadow-sm overflow-hidden relative group">
+                                <div class="absolute -top-4 -right-4 p-3 opacity-[0.03] text-slate-900 transition-transform group-hover:scale-110 duration-500"><i data-lucide="train-front" class="w-48 h-48"></i></div>
+                                <div class="flex items-center gap-2 mb-4 relative">
+                                    <span class="px-2 py-0.5 bg-red-100 text-red-600 rounded-md text-[10px] font-black tracking-widest uppercase">상행</span>
+                                    <span class="font-black text-slate-800 tracking-tight">KTX 326</span>
                                 </div>
-                                <div class="flex justify-between items-center mb-4">
-                                    <div class="text-center"><div class="text-2xl font-black text-slate-900">10:33</div><div class="text-sm text-slate-500 font-bold mt-1 tracking-tight">부산</div></div>
-                                    <div class="flex-1 px-4 flex flex-col items-center"><div class="text-[10px] text-slate-400 font-bold mb-1">2시간 35분 소요</div><div class="w-full h-px bg-slate-100 relative"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></div></div></div>
-                                    <div class="text-center"><div class="text-2xl font-black text-slate-900">13:08</div><div class="text-sm text-slate-500 font-bold mt-1 tracking-tight">수서</div></div>
+                                <div class="flex justify-between items-center mb-6 relative">
+                                    <div class="text-center">
+                                        <div class="text-3xl font-black text-slate-900 leading-none">10:33</div>
+                                        <div class="text-xs text-slate-400 font-bold mt-2 uppercase tracking-tighter">부산역</div>
+                                    </div>
+                                    <div class="flex-1 px-4 flex flex-col items-center">
+                                        <div class="text-[10px] text-slate-400 font-black mb-2 uppercase tracking-wide">2h 35m</div>
+                                        <div class="w-full h-[2px] bg-slate-100 relative">
+                                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full border-2 border-white shadow-sm"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-3xl font-black text-slate-900 leading-none">13:08</div>
+                                        <div class="text-xs text-slate-400 font-bold mt-2 uppercase tracking-tighter">수서역</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm overflow-hidden relative">
-                                <div class="absolute top-0 right-0 p-3 opacity-10 text-slate-400"><i data-lucide="train-front" class="w-20 h-20"></i></div>
-                                <div class="flex items-center gap-2 mb-3">
-                                    <span class="px-2 py-0.5 bg-blue-100 text-blue-600 rounded-md text-xs font-bold">하행</span>
-                                    <span class="font-bold text-slate-800">KTX 339</span>
+                            <!-- 하행 -->
+                            <div class="bg-white border border-slate-200 rounded-[1.5rem] p-6 shadow-sm overflow-hidden relative group">
+                                <div class="absolute -top-4 -right-4 p-3 opacity-[0.03] text-slate-900 transition-transform group-hover:scale-110 duration-500"><i data-lucide="train-front" class="w-48 h-48 scale-x-[-1]"></i></div>
+                                <div class="flex items-center gap-2 mb-4 relative">
+                                    <span class="px-2 py-0.5 bg-blue-100 text-blue-600 rounded-md text-[10px] font-black tracking-widest uppercase">하행</span>
+                                    <span class="font-black text-slate-800 tracking-tight">KTX 339</span>
                                 </div>
-                                <div class="flex justify-between items-center mb-4">
-                                    <div class="text-center"><div class="text-2xl font-black text-slate-900">13:55</div><div class="text-sm text-slate-500 font-bold mt-1 tracking-tight">수서</div></div>
-                                    <div class="flex-1 px-4 flex flex-col items-center"><div class="text-[10px] text-slate-400 font-bold mb-1">2시간 19분 소요</div><div class="w-full h-px bg-slate-100 relative"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></div></div></div>
-                                    <div class="text-center"><div class="text-2xl font-black text-slate-900">16:14</div><div class="text-sm text-slate-500 font-bold mt-1 tracking-tight">부산</div></div>
+                                <div class="flex justify-between items-center mb-6 relative">
+                                    <div class="text-center">
+                                        <div class="text-3xl font-black text-slate-900 leading-none">13:55</div>
+                                        <div class="text-xs text-slate-400 font-bold mt-2 uppercase tracking-tighter">수서역</div>
+                                    </div>
+                                    <div class="flex-1 px-4 flex flex-col items-center">
+                                        <div class="text-[10px] text-slate-400 font-black mb-2 uppercase tracking-wide">2h 19m</div>
+                                        <div class="w-full h-[2px] bg-slate-100 relative">
+                                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-blue-500 rounded-full border-2 border-white shadow-sm"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-3xl font-black text-slate-900 leading-none">16:14</div>
+                                        <div class="text-xs text-slate-400 font-bold mt-2 uppercase tracking-tighter">부산역</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </section>
+
                     <section>
-                        <h3 class="text-lg font-bold mb-4 flex items-center gap-2"><i data-lucide="bed" class="w-5 h-5 text-indigo-500"></i>숙소 정보</h3>
-                        <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm flex flex-col md:flex-row">
-                            <div class="w-full md:w-2/5 h-64 md:h-auto bg-slate-100 relative overflow-hidden">
-                                <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230216_47%2F1676513686848sCd4l_JPEG%2F--Hotel_Exterior_%25281%2529.jpg" alt="Hotel Exterior" class="w-full h-full object-cover">
-                                <div class="absolute bottom-4 left-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-white shadow-lg flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-red-400"></i>호텔 외관</div>
-                            </div>
-                            <div class="flex-1 p-6">
-                                <h4 class="text-xl font-black text-slate-900 mb-1 tracking-tight">호텔 크레센도 서울</h4>
-                                <p class="text-indigo-600 text-xs font-bold mb-4">Hotel Crescendo Seoul Managed by Accor</p>
-                                <div class="flex items-start gap-3 mb-6">
-                                    <div class="p-2 bg-slate-50 rounded-lg text-slate-400"><i data-lucide="map-pin" class="w-4 h-4"></i></div>
-                                    <div><div class="text-xs text-slate-400 font-bold mb-0.5">주소</div><div class="text-sm text-slate-700 font-medium">서울 강남구 봉은사로 428</div></div>
+                        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                            <i data-lucide="bed" class="w-6 h-6 text-indigo-500"></i>숙소 정보
+                        </h3>
+                        <div class="bg-white border border-slate-200 rounded-[2rem] overflow-hidden shadow-sm flex flex-col lg:flex-row">
+                            <div class="w-full lg:w-2/5 h-64 lg:h-auto bg-slate-100 relative overflow-hidden">
+                                <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230216_47%2F1676513686848sCd4l_JPEG%2F--Hotel_Exterior_%25281%2529.jpg" alt="Hotel Exterior" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                                <div class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-bold text-white shadow-lg flex items-center gap-2 border border-white/10">
+                                    <i data-lucide="map-pin" class="w-3 h-3 text-red-400"></i>호텔 외관
                                 </div>
-                                <a href="https://map.naver.com/p/entry/place/1986144087?lng=127.0469875&lat=37.5108166" target="_blank" class="flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-xl text-sm font-bold hover:bg-slate-800 transition-colors shadow-lg shadow-slate-200">
+                            </div>
+                            <div class="flex-1 p-6 md:p-8 flex flex-col justify-between">
+                                <div>
+                                    <h4 class="text-2xl font-black text-slate-900 mb-1 tracking-tight">호텔 크레센도 서울</h4>
+                                    <p class="text-indigo-600 text-xs font-black mb-6 uppercase tracking-wider">Hotel Crescendo Seoul Managed by Accor</p>
+                                    <div class="flex items-start gap-4 mb-8">
+                                        <div class="p-3 bg-slate-50 rounded-2xl text-slate-400 border border-slate-100"><i data-lucide="map-pin" class="w-5 h-5"></i></div>
+                                        <div>
+                                            <div class="text-[10px] text-slate-400 font-black mb-1 uppercase">Address</div>
+                                            <div class="text-base text-slate-700 font-semibold leading-relaxed">서울 강남구 봉은사로 428</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="https://map.naver.com/p/entry/place/1986144087?lng=127.0469875&lat=37.5108166" target="_blank" class="flex items-center justify-center gap-2 bg-slate-900 text-white py-4 rounded-2xl text-sm font-black hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 active:scale-95">
                                     <i data-lucide="map" class="w-4 h-4"></i>네이버 지도에서 보기
                                 </a>
                             </div>
@@ -308,7 +392,7 @@
         function getEventClass(type) {
             switch (type) {
                 case 'education': return 'bg-blue-100 text-blue-800';
-                case 'work': return 'bg-gray-100 text-gray-800';
+                case 'work': return 'bg-slate-100 text-slate-800';
                 case 'social': return 'bg-pink-100 text-pink-800';
                 case 'move': return 'bg-amber-100 text-amber-800';
                 case 'setup': return 'bg-emerald-100 text-emerald-800';
